@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+.jumbotron-background{
+	background: url("../../images/form1.png");
+	background-color: #ff4f4f;
+	color: white;
+	font-weight: bold;
+	font-size: large;
+}
+
+.jumbotron h2 {
+	color: white;
+	font-size: x-large;
+}
+
+.nav-link {
+	font-weight: bold;
+}
+
+.nav li.active a{
+	background-color: black;
+	color: white;
+}
+
+.nav:hover{
+	color: #ff4f4f;
+}
