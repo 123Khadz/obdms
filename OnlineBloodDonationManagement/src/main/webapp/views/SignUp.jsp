@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,90 @@
 <link rel="stylesheet" href="bootstrap/css/SignUp.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	function getCity() {
+		let stateId = $("#stateId").val();
+		console.log(stateId);
+		if (stateId != null) {
+			var ajax = new XMLHttpRequest();
+			var url = "fetchCity?stateId=" + stateId;
+			document.getElementById("cityId").innerHTML = "<option value='-1' selected='selected'>Select City</option>";
+			ajax.onreadystatechange = function() {
+				if (ajax.readyState == 4) {
+					let res = ajax.responseText;
+					let result = JSON.parse(res);
+					console.log(result)
+					var count = Object.keys(result).length;
+					for (let i = 0; i < count; i++) {
+						let cityList = "<option value='"+result[i]["cityId"]+"'>"
+								+ result[i]["cityName"] + "</option>";
+						document.getElementById("cityId").innerHTML += cityList;
+					}
+				}
+			};
+			ajax.open("GET", url, true);
+			ajax.send(null);
+		}
+	}
+	
+	function validatePassword() {
+		var password = document.getElementById('password').value;
+		if (password.length < 6) {
+			document.getElementById('alertMsg').style.color = 'red';
+			document.getElementById('alertMsg').innerHTML = 'Password must be of 6 characters or more!';
+			document.getElementById('password').style.color = 'red';
+			return false;
+		}
+		else{
+			document.getElementById('alertMsg').innerHTML = '';
+			document.getElementById('password').style.color = 'green';
+			return false;
+		}
+	}
+	
+	var check = function() {
+		if (document.getElementById('password').value === document
+				.getElementById('confirmPassword').value) {
+			document.getElementById('message').style.color = 'green';
+			document.getElementById('message').innerHTML = 'matching...';
+			document.getElementById('confirmPassword').style.color = 'green';
+		} else {
+			document.getElementById('confirmPassword').style.color = 'red';
+			document.getElementById('message').style.color = 'red';
+			document.getElementById('message').innerHTML = 'not matching...';
+		}
+	}
+	
+	function validatePhone(){
+		var phoneNumber = document.getElementById('phoneNumber').value;
+		if (phoneNumber.length != 10) {
+			document.getElementById('phoneError').style.color = 'red';
+			document.getElementById('phoneError').innerHTML = 'Phone Number must be of 10 digits!';
+			document.getElementById('phoneNumber').style.color = 'red';
+			return false;
+		}
+		else{
+			document.getElementById('phoneError').innerHTML = '';
+			document.getElementById('phoneNumber').style.color = 'green';
+			return false;
+		}
+	}
+	
+	function validateAge(){
+		var age = document.getElementById('age').value;
+		if (age < 20 || age > 60) {
+			document.getElementById('ageError').style.color = 'red';
+			document.getElementById('ageError').innerHTML = 'To donate blood, age must be in the range 20-60!';
+			document.getElementById('age').style.color = 'red';
+			return false;
+		}
+		else{
+			document.getElementById('ageError').innerHTML = '';
+			document.getElementById('age').style.color = 'green';
+			return false;
+		}
+	}
+</script>
 <title>SignUp</title>
 </head>
 <body>
@@ -24,27 +110,25 @@
 			<div class="tab-pane active" id="donor" role="tabpanel">
 				<div class="jumbotron jumbotron-background">
 					<h2 class="text-center">Sign Up as Donor</h2>
-					<form>
-						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="donorId" class="form-label">Donor ID:</label> <input
-								type="text" id="donorId" name="donorId" class="form-control"
-								placeholder="Enter Donor ID" value="" readonly="readonly" />
-						</div>
+					<form action="/add_donor" method="post">
+						<label class="text-success"><c:if test="${addDonor}">Donor added successfully!</c:if></label>
+						<label class="text-danger"><c:if test="${existDonor}">Donor already exists!</c:if></label>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="firstName" class="form-label">First Name:</label> <input
 								type="text" id="firstName" name="firstName" class="form-control"
-								placeholder="Enter First Name" value="" />
+								placeholder="Enter First Name" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="lastName" class="form-label">Last Name:</label> <input
 								type="text" id="lastName" name="lastName" class="form-control"
-								placeholder="Enter Last Name" value="" />
+								placeholder="Enter Last Name" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							Gender:<select id="gender" name="gender" class="form-control">
+							<label for="gender" class="form-label">Gender:</label> <select
+								id="gender" name="gender" class="form-control" required>
 								<option value="-1" selected="selected">Select Your
 									Gender</option>
 								<option value="Male">Male</option>
@@ -55,89 +139,94 @@
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="age" class="form-label">Age:</label> <input
-								type="number" id="age" name="age" class="form-control"
-								placeholder="Enter Age" value="" />
+								type="number" id="age" name="age" class="form-control" onchange="validateAge()"
+								placeholder="Enter Age" required />
+							<div>
+								<span id='ageError'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="bloodGroup" class="form-label">Blood Group:</label> <select
-								id="bloodGroup" name="bloodGroup" class="form-control">
+							<label for="bloodGroupId" class="form-label">Blood Group:</label>
+							<select id="bloodGroupId" name="bloodGroupId"
+								class="form-control" required>
 								<option value="-1" selected="selected">Select Your
 									Blood Group</option>
-								<option value="A-">A-</option>
-								<option value="A+">A+</option>
-								<option value="B-">B-</option>
-								<option value="B+">B+</option>
-								<option value="AB+">AB+</option>
-								<option value="AB-">AB-</option>
-								<option value="O+">O+</option>
-								<option value="O-">O-</option>
+								<c:forEach var="group" items="${bloodGroupList }">
+									<option value="${group.bloodGroupId }">${group.bloodGroup }</option>
+								</c:forEach>
 							</select>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="state" class="form-label">State:</label> <select
-								id="state" name="state" class="form-control">
+							<label for="stateId" class="form-label">State:</label> <select
+								id="stateId" name="stateId" class="form-control" required
+								onchange="getCity()">
 								<option value="-1" selected="selected">Select State</option>
-								<option value="Bihar">Bihar</option>
-								<option value="Uttar Pradesh">Uttar Pradesh</option>
+								<c:forEach var="state" items="${stateList }">
+									<option value="${state.stateId }">${state.stateName }</option>
+								</c:forEach>
 							</select>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="city" class="form-label">City:</label> <select
-								id="city" name="city" class="form-control">
+							<label for="cityId" class="form-label">City:</label> <select
+								id="cityId" name="cityId" class="form-control" required>
 								<option value="-1" selected="selected">Select City</option>
-								<option value="Patna">Patna</option>
-								<option value="Gaya">Gaya</option>
-								<option value="Kanpur">Kanpur</option>
 							</select>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="location" class="form-label">Location:</label>
-							<input type="text" id="location" name="location"
-								class="form-control" placeholder="Enter Location" value="" />
+							<label for="location" class="form-label">Location:</label> <input
+								type="text" id="location" name="location" class="form-control"
+								placeholder="Enter Location" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="pincode" class="form-label">Pincode:</label> <input
 								type="number" id="pincode" name="pincode" class="form-control"
-								placeholder="Enter Pincode" value="" />
+								placeholder="Enter Pincode" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="phoneNumber" class="form-label">Phone Number:</label>
-							<input type="tel" id="phoneNumber" name="phoneNumber"
-								class="form-control" placeholder="Enter Phone Number" value="" />
+							<input type="tel" id="phoneNumber" name="phoneNumber" onchange="validatePhone()"
+								class="form-control" placeholder="Enter Phone Number" required />
+							<div>
+								<span id='phoneError'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="donorEmail" class="form-label">Email:</label>
-							<input type="email" id="donorEmail" name="donorEmail"
-								 class="form-control" placeholder="Enter Email"
-								value="" />
+							<label for="email" class="form-label">Email:</label> <input
+								type="email" id="email" name="email" class="form-control"
+								placeholder="Enter Email" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="donorPassword" class="form-label">Password:</label>
-							<input type="password" id="donorPassword"
-								name="donorPassword" class="form-control"
-								placeholder="Enter Password" value="" />
+							<label for="password" class="form-label">Password:</label> <input
+								type="password" id="password" name="password" onkeyup='check();'
+								onchange="validatePassword()" class="form-control"
+								placeholder="Enter Password" required />
+							<div>
+								<span id='alertMsg'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="donorCPassword" class="form-label">Confirm
-								Password:</label> <input type="password" id="donorCPassword"
-								name="donorCPassword" class="form-control"
-								placeholder="Confirm Password" value="" />
+							<label for="confirmPassword" class="form-label">Confirm
+								Password:</label> <input type="password" id="confirmPassword"
+								name="confirmPassword" class="form-control" onkeyup='check();'
+								placeholder="Confirm Password" required />
+							<div>
+								<span id='message'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mt-2 mx-auto row">
 							<div class="col text-right">
-								<input type="submit" name="register"
-									class="btn btn-primary w-25" placeholder="Sign Up"
-									value="Sign Up">
+								<input type="submit" class="btn btn-primary w-25"
+									placeholder="Sign Up" value="Sign Up">
 							</div>
 						</div>
 					</form>
@@ -186,8 +275,8 @@
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="age" class="form-label">Age:</label> <input
-								type="number" id="age" name="age" class="form-control"
+							<label for="recipientage" class="form-label">Age:</label> <input
+								type="number" id="recipientage" name="recipientage" class="form-control"
 								placeholder="Enter Age">
 						</div>
 
@@ -298,7 +387,7 @@
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="password" class="form-label">Password:</label> <input
-								type="password" id="password" name="password"
+								type="password" id="recipientPassword" name="recipientPassword"
 								class="form-control" placeholder="Enter Password" value="">
 						</div>
 

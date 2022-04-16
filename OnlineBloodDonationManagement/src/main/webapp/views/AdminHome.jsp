@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,86 +12,18 @@
 	<%@include file="AdminHeader.jsp"%>
 	<div class="content-wrapper">
 		<div class="row">
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body font-weight-">
-						<h3 class="text-center font-weight-semibold">
-							A+ <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
+			<c:forEach var="stock" items="${stockList }">
+				<div class="col-md-3 grid-margin stretch-card">
+					<div class="card rounded bg-success text-white mb-3">
+						<div class="card-body font-weight-">
+							<h3 class="text-center font-weight-semibold">
+								${stock.bloodGroup }<sup><span
+									class="top-0 start-100 translate-middle badge rounded-pill bg-dark">${stock.stockOfBlood }</span></sup>
+							</h3>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							A- <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							B+ <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							B- <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							O+ <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							O- <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							AB+ <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-3 grid-margin stretch-card">
-				<div class="card rounded bg-success text-white mb-3">
-					<div class="card-body">
-						<h3 class="text-center font-weight-semibold">
-							AB- <sup><span
-								class="top-0 start-100 translate-middle badge rounded-pill bg-dark">55</span></sup>
-						</h3>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 		<div class="row">
 			<div class="col-md-6">

@@ -84,9 +84,6 @@
 											<label for="cityId">City</label> <select id="cityId"
 												name="cityId" class="custom-select custom-select-sm">
 												<option value="-1" selected="selected">Select City</option>
-												<!-- <option value="3">Patna</option>
-												<option value="4">Lucknow</option>
-												<option value="5">Gaya</option> -->
 											</select>
 										</div>
 									</div>

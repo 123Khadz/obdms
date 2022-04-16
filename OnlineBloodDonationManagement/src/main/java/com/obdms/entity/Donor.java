@@ -24,8 +24,9 @@ public class Donor {
 	@Column(nullable = false)
 	private int age;
 
-	@Column(nullable = false, length = 50)
-	private String bloodGroup;
+	@ManyToOne
+	@JoinColumn(name = "bloodGroup")
+	private BloodGroup bloodGroup;
 
 	@ManyToOne
 	@JoinColumn(name = "address")
@@ -97,11 +98,11 @@ public class Donor {
 		this.age = age;
 	}
 
-	public String getBloodGroup() {
+	public BloodGroup getBloodGroup() {
 		return bloodGroup;
 	}
 
-	public void setBloodGroup(String bloodGroup) {
+	public void setBloodGroup(BloodGroup bloodGroup) {
 		this.bloodGroup = bloodGroup;
 	}
 

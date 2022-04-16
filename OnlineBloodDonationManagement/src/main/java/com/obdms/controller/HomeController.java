@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.obdms.entity.Admin;
 import com.obdms.service.AdminService;
+import com.obdms.service.BloodGroupService;
+import com.obdms.service.StateService;
 
 @Controller
 public class HomeController {
@@ -20,13 +22,21 @@ public class HomeController {
 	@Autowired
 	AdminService adminService;
 	
+	@Autowired
+	StateService stateService;
+	
+	@Autowired
+	BloodGroupService bloodGroupService;
+	
 	@RequestMapping("/home")
 	public String home() {
 		return "Home";
 	}
 	
 	@RequestMapping("/signup")
-	public String signup() {
+	public String signup(Model model) {
+		model.addAttribute("stateList", stateService.getStateList());
+		model.addAttribute("bloodGroupList", bloodGroupService.getBloodGroupListSortedByBloodGroup());
 		return "SignUp";
 	}
 	

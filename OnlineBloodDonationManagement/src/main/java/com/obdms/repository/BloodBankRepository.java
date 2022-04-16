@@ -18,7 +18,7 @@ public interface BloodBankRepository {
 
 	BloodBank findBloodBankById(Long bloodBankId);
 
-	BloodBank findBloodBankByBloodGroupId(BloodGroup bloodGroup);
+	List<BloodBank> getBloodBankListByBloodGroup(BloodGroup bloodGroup);
 
 	BloodBank findBloodBankByHospitalId(Hospital hospital);
 	

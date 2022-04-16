@@ -55,11 +55,8 @@ public class BloodBankServiceImpl implements BloodBankService {
 	}
 
 	@Override
-	public BloodBank findBloodBankByBloodGroupId(BloodGroup bloodGroup) {
-		BloodBank bloodBank = null;
-		if (bloodGroup != null)
-			bloodBank = bloodBankRepository.findBloodBankByBloodGroupId(bloodGroup);
-		return bloodBank;
+	public List<BloodBank> getBloodBankListByBloodGroup(BloodGroup bloodGroup) {
+		return bloodBankRepository.getBloodBankListByBloodGroup(bloodGroup);
 	}
 
 	@Override

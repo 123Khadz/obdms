@@ -17,6 +17,9 @@ public class BloodGroup {
 	@OneToMany(mappedBy = "bloodGroup", cascade = CascadeType.ALL)
 	private List<BloodBank> bloodBanksList;
 
+	@OneToMany(mappedBy = "bloodGroup", cascade = CascadeType.ALL)
+	private List<Donor> donorsList;
+
 	public long getBloodGroupId() {
 		return bloodGroupId;
 	}
@@ -39,6 +42,14 @@ public class BloodGroup {
 
 	public void setBloodBanksList(List<BloodBank> bloodBanksList) {
 		this.bloodBanksList = bloodBanksList;
+	}
+
+	public List<Donor> getDonorsList() {
+		return donorsList;
+	}
+
+	public void setDonorsList(List<Donor> donorsList) {
+		this.donorsList = donorsList;
 	}
 
 }

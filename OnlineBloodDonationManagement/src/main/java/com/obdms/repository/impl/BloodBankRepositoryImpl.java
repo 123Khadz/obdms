@@ -45,8 +45,7 @@ public class BloodBankRepositoryImpl implements BloodBankRepository {
 		try {
 			return (BloodBank) entityManager
 					.createQuery("from BloodBank where hospital = :hospital and bloodGroup = :bloodGroup")
-					.setParameter("hospital", hospital).setParameter("bloodGroup", bloodGroup)
-					.getSingleResult();
+					.setParameter("hospital", hospital).setParameter("bloodGroup", bloodGroup).getSingleResult();
 		} catch (NoResultException e) {
 		}
 		return null;
@@ -62,11 +61,12 @@ public class BloodBankRepositoryImpl implements BloodBankRepository {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public BloodBank findBloodBankByBloodGroupId(BloodGroup bloodGroup) {
+	public List<BloodBank> getBloodBankListByBloodGroup(BloodGroup bloodGroup) {
 		try {
-			return (BloodBank) entityManager.createQuery("from BloodBank where bloodGroup = :bloodGroup")
-					.setParameter("bloodGroup", bloodGroup).getSingleResult();
+			return entityManager.createQuery("from BloodBank where bloodGroup = :bloodGroup")
+					.setParameter("bloodGroup", bloodGroup).getResultList();
 		} catch (NoResultException e) {
 		}
 		return null;
