@@ -12,12 +12,21 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	AdminRepository adminRepository;
-	
+
 	@Override
 	public Admin findByEmailAndPassword(String email, String password) {
 		Admin admin = null;
 		if (email != null && password != null) {
 			admin = adminRepository.findByEmailAndPassword(email, password);
+		}
+		return admin;
+	}
+
+	@Override
+	public Admin findByEmail(String email) {
+		Admin admin = null;
+		if (email != null) {
+			admin = adminRepository.findByEmail(email);
 		}
 		return admin;
 	}

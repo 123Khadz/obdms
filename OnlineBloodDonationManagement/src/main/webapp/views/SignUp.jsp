@@ -111,8 +111,7 @@
 				<div class="jumbotron jumbotron-background">
 					<h2 class="text-center">Sign Up as Donor</h2>
 					<form action="/add_donor" method="post">
-						<label class="text-success"><c:if test="${addDonor}">Donor added successfully!</c:if></label>
-						<label class="text-danger"><c:if test="${existDonor}">Donor already exists!</c:if></label>
+						<label class="text-danger"><c:if test="${existDonor}">Email already exists!</c:if></label>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="firstName" class="form-label">First Name:</label> <input

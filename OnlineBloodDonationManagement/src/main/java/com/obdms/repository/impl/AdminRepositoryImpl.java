@@ -27,4 +27,14 @@ public class AdminRepositoryImpl implements AdminRepository {
 		return null;
 	}
 
+	@Override
+	public Admin findByEmail(String email) {
+		try {
+			return (Admin) entityManager.createQuery("from Admin where email = :email").setParameter("email", email)
+					.getSingleResult();
+		} catch (NoResultException e) {
+		}
+		return null;
+	}
+
 }
