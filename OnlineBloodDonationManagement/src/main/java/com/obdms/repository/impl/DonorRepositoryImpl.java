@@ -48,6 +48,16 @@ public class DonorRepositoryImpl implements DonorRepository {
 		return null;
 	}
 
+	@Override
+	public Donor findDonorByEmailAndPassword(String email, String password) {
+		try {
+			return (Donor) entityManager.createQuery("from Donor where email = :email and password = :password")
+					.setParameter("email", email).setParameter("password", password).getSingleResult();
+		} catch (NoResultException e) {
+		}
+		return null;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Donor> getDonorList() {

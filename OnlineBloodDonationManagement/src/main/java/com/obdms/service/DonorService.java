@@ -14,6 +14,8 @@ public interface DonorService {
 	void deleteDonor(Donor donor);
 
 	Donor findDonorByEmail(String email);
+	
+	Donor findDonorByEmailAndPassword(String email, String password);
 
 	List<Donor> getDonorList();
 

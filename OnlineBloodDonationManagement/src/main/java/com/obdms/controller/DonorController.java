@@ -1,5 +1,7 @@
 package com.obdms.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.obdms.entity.Address;
@@ -27,7 +30,7 @@ public class DonorController {
 
 	@Autowired
 	AdminService adminService;
-	
+
 	@Autowired
 	CityService cityService;
 
@@ -44,11 +47,11 @@ public class DonorController {
 	BloodGroupService bloodGroupService;
 
 	@PostMapping("/add_donor")
-	public String add_donor(@RequestParam(value = "stateId") long stateId,
-			@RequestParam(value = "cityId") long cityId, @RequestParam(value = "bloodGroupId") long bloodGroupId,
-			Donor donor, Address address, Model model, HttpServletRequest request) {
+	public String add_donor(@RequestParam(value = "stateId") long stateId, @RequestParam(value = "cityId") long cityId,
+			@RequestParam(value = "bloodGroupId") long bloodGroupId, Donor donor, Address address, Model model,
+			HttpServletRequest request) {
 
-		Admin admin = adminService.findByEmail(donor.getEmail()); 
+		Admin admin = adminService.findByEmail(donor.getEmail());
 		Donor existingDonor = donorService.findDonorByEmail(donor.getEmail());
 
 		if (admin == null && existingDonor == null) {
@@ -67,11 +70,11 @@ public class DonorController {
 			donor.setBloodGroup(group);
 			donor.setDpURL("images/body.png");
 			donorService.createDonor(donor);
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("donorUser", donor);
-			model.addAttribute("donor", donor);
-			return "redirect:/DonorHome";
+
+			return "redirect:/donorhome";
 		} else {
 			model.addAttribute("existDonor", true);
 			return "SignUp";
@@ -79,4 +82,16 @@ public class DonorController {
 
 	}
 
+	@RequestMapping("/donorhome")
+	public String donorhome(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("donorUser") != null) {
+			Donor donor = (Donor) session.getAttribute("donorUser");
+			model.addAttribute("donor", donor);
+			return "DonorHome";
+		}
+
+		model.addAttribute("loginError", true);
+		return "Home";
+	}
 }

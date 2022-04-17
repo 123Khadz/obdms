@@ -46,6 +46,14 @@ public class DonorServiceImpl implements DonorService {
 	}
 
 	@Override
+	public Donor findDonorByEmailAndPassword(String email, String password) {
+		Donor donor = null;
+		if (email != null && password != null)
+			donor = donorRepository.findDonorByEmailAndPassword(email, password);
+		return donor;
+	}
+
+	@Override
 	public List<Donor> getDonorList() {
 		return donorRepository.getDonorList();
 	}
