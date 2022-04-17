@@ -139,8 +139,8 @@
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="age" class="form-label">Age:</label> <input
-								type="number" id="age" name="age" class="form-control" onchange="validateAge()"
-								placeholder="Enter Age" required />
+								type="number" id="age" name="age" class="form-control"
+								onchange="validateAge()" placeholder="Enter Age" required />
 							<div>
 								<span id='ageError'></span>
 							</div>
@@ -190,8 +190,9 @@
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="phoneNumber" class="form-label">Phone Number:</label>
-							<input type="tel" id="phoneNumber" name="phoneNumber" onchange="validatePhone()"
-								class="form-control" placeholder="Enter Phone Number" required />
+							<input type="tel" id="phoneNumber" name="phoneNumber"
+								onchange="validatePhone()" class="form-control"
+								placeholder="Enter Phone Number" required />
 							<div>
 								<span id='phoneError'></span>
 							</div>
@@ -235,37 +236,25 @@
 			<div class="tab-pane" id="recipient" role="tabpanel">
 				<div class="jumbotron jumbotron-background">
 					<h2 class="text-center">Sign Up as Recipient</h2>
-					<form action="RecipientRegister" method="post">
+					<form action="/add_recipient" method="post">
+						<label class="text-success"><c:if test="${addRecipient}">Recipient added successfully!</c:if></label>
+						<label class="text-danger"><c:if test="${existRecipient}">Recipient already exists!</c:if></label>
+
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="recipientId" class="form-label">Recipient ID:</label>
-							<input type="text" id="donorId" name="donorId"
-								class="form-control" placeholder="Enter Recipient ID"
-								readonly="readonly">
+							<label for="firstName" class="form-label">First Name:</label> <input
+								type="text" id="firstName" name="firstName" class="form-control"
+								placeholder="Enter First Name" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="patientName" class="form-label">Patient Name:</label>
-							<input type="text" id="patientName" name="patientName"
-								class="form-control" placeholder="Enter Patient Name">
+							<label for="lastName" class="form-label">Last Name:</label> <input
+								type="text" id="lastName" name="lastName" class="form-control"
+								placeholder="Enter Last Name" required />
 						</div>
-
-						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="GuardianName" class="form-label">Guardian
-								Name:</label> <input type="text" id="GuardianName" name="GuardianName"
-								class="form-control" placeholder="Enter Guardian Name">
-						</div>
-
-						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="relationwithpatient" class="form-label">Relation
-								with Patient:</label> <input type="text" id="Relationwithpatient"
-								name="Relationwithpatient" class="form-control"
-								placeholder="Enter Relation with Patient">
-						</div>
-
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="gender" class="form-label">Gender:</label> <select
-								id="gender" name="gender" class="form-control">
+								id="gender" name="gender" class="form-control" required>
 								<option value="-1" selected="selected">Select Your
 									Gender</option>
 								<option value="Male">Male</option>
@@ -275,133 +264,96 @@
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="recipientage" class="form-label">Age:</label> <input
-								type="number" id="recipientage" name="recipientage" class="form-control"
-								placeholder="Enter Age">
+							<label for="age" class="form-label">Age:</label> <input
+								type="number" id="age" name="age" class="form-control"
+								onchange="validateAge()" placeholder="Enter Age" required />
+							<div>
+								<span id='ageError'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="bloodGroup" class="form-label">Required Blood
-								:</label> <select id="bloodGroup" name="bloodGroup" class="form-control">
-								<option value="-1" selected="selected">Blood Group
-									Required</option>
-								<option value="A-">A-</option>
-								<option value="A+">A+</option>
-								<option value="B-">B-</option>
-								<option value="B+">B+</option>
-								<option value="AB+">AB+</option>
-								<option value="AB-">AB-</option>
-								<option value="O+">O+</option>
-								<option value="O-">O-</option>
+							<label for="bloodGroupId" class="form-label">Blood Group:</label>
+							<select id="bloodGroupId" name="bloodGroupId"
+								class="form-control" required>
+								<option value="-1" selected="selected">Select Your
+									Blood Group</option>
+								<c:forEach var="group" items="${bloodGroupList }">
+									<option value="${group.bloodGroupId }">${group.bloodGroup }</option>
+								</c:forEach>
 							</select>
 						</div>
 
-
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="addressofpatient" class="form-label">Address
-								of Patient :</label> <input type="text" id="addressofpatient"
-								name="addressofpatient" class="form-control"
-								placeholder="Enter Address of Patient">
-						</div>
-
-						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="state" class="form-label">State:</label> <select
-								id="state" name="state" class="form-control"
+							<label for="stateId" class="form-label">State:</label> <select
+								id="stateId" name="stateId" class="form-control" required
 								onchange="getCity()">
 								<option value="-1" selected="selected">Select State</option>
-								<option value="Bihar-">Bihar</option>
-
+								<c:forEach var="state" items="${stateList }">
+									<option value="${state.stateId }">${state.stateName }</option>
+								</c:forEach>
 							</select>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="city" class="form-label">City:</label> <select
-								id="city" name="city" class="form-control">
+							<label for="cityId" class="form-label">City:</label> <select
+								id="cityId" name="cityId" class="form-control" required>
 								<option value="-1" selected="selected">Select City</option>
-
-								<option value="Araria">Araria</option>
-								<option value="Arwal">Arwal</option>
-								<option value="Aurangabad">Aurangabad</option>
-								<option value="Banka">Banka</option>
-								<option value="Begusarai">Begusarai</option>
-								<option value="Bhagalpur">Bhagalpur</option>
-								<option value="Ara">Ara</option>
-								<option value="Buxar">Buxar</option>
-								<option value="Darbhanga">Darbhanga</option>
-								<option value="Motihari">Motihari</option>
-								<option value="Gaya">Gaya</option>
-								<option value="Gopalganj">Banka</option>
-								<option value="Jamui">Begusarai</option>
-								<option value="Jehanabad">Bhagalpur</option>
-								<option value="Khagaria">Bhojpur</option>
-								<option value="Kishanganj">Buxar</option>
-								<option value="Kaimur">Kaimur</option>
-								<option value="Katihar">Katihar</option>
-								<option value="Lakhisarai">Lakhisarai</option>
-								<option value="Madhubani">Madhubani</option>
-								<option value="Munger">Munger</option>
-								<option value="Madhepura">Madhepura</option>
-								<option value="Muzaffarpur">Muzaffarpur</option>
-								<option value="Bihar Sharif">Bihar Sharif</option>
-								<option value="Nawada">Nawada</option>
-								<option value="Patna">Patna</option>
-								<option value="Purnia">Purnia</option>
-								<option value="Sasaram">Sasaram</option>
-								<option value="Saharsa">Saharsa</option>
-								<option value="Samastipur">Samastipur</option>
-								<option value="Sheohar">Sheohar</option>
-								<option value="Sheikhpura">Sheikhpura</option>
-								<option value="Chhapra">Chhapra</option>
-								<option value="Sitamarhi">Sitamarhi</option>
-								<option value="Supaul">Supaul</option>
-								<option value="Siwan">Siwan</option>
-								<option value="Hajipur">Hajipur</option>
-								<option value="Bettiah">Bettiah</option>
-
 							</select>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="location" class="form-label">Location:</label> <input
 								type="text" id="location" name="location" class="form-control"
-								placeholder="Enter Location">
+								placeholder="Enter Location" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="pincode" class="form-label">Pincode:</label> <input
 								type="number" id="pincode" name="pincode" class="form-control"
-								placeholder="Enter Pincode">
+								placeholder="Enter Pincode" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="phoneNumber" class="form-label">Phone Number:</label>
 							<input type="tel" id="phoneNumber" name="phoneNumber"
-								class="form-control" placeholder="Enter Phone Number">
+								onchange="validatePhone()" class="form-control"
+								placeholder="Enter Phone Number" required />
+							<div>
+								<span id='phoneError'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="email" class="form-label">Email:</label> <input
 								type="email" id="email" name="email" class="form-control"
-								placeholder="Enter Email">
+								placeholder="Enter Email" required />
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
 							<label for="password" class="form-label">Password:</label> <input
-								type="password" id="recipientPassword" name="recipientPassword"
-								class="form-control" placeholder="Enter Password" value="">
+								type="password" id="password" name="password" onkeyup='check();'
+								onchange="validatePassword()" class="form-control"
+								placeholder="Enter Password" required />
+							<div>
+								<span id='alertMsg'></span>
+							</div>
 						</div>
 
 						<div class="w-75 mb-3 mt-5 mx-auto">
-							<label for="cpassword" class="form-label">Confirm
-								Password:</label> <input type="password" id="cpassword" name="cpassword"
-								class="form-control" placeholder="Confirm Password" value="">
+							<label for="confirmPassword" class="form-label">Confirm
+								Password:</label> <input type="password" id="confirmPassword"
+								name="confirmPassword" class="form-control" onkeyup='check();'
+								placeholder="Confirm Password" required />
+							<div>
+								<span id='message'></span>
+							</div>
 						</div>
 
-						<div class="w-75 mb-3 mt-2 mx-auto row">
+						<div class="w-75 mt-2 mx-auto row">
 							<div class="col text-right">
-								<input type="submit" name="register"
-									class="btn btn-primary w-25" placeholder="Sign Up"
-									value="Sign Up">
+								<input type="submit" class="btn btn-primary w-25"
+									placeholder="Sign Up" value="Sign Up">
 							</div>
 						</div>
 					</form>

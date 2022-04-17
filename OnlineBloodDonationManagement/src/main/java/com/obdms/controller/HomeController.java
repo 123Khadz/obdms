@@ -50,6 +50,11 @@ public class HomeController {
 		return "ContactUs";
 	}
 	
+	@RequestMapping("/forgotPassword")
+	public String forgotPassword() {
+		return "ForgotPassword";
+	}
+	
 	@PostMapping("/login")
 	public String loginUser(@RequestParam(value = "email") String email, @RequestParam("password") String password,
 			HttpServletRequest request, Model model) {

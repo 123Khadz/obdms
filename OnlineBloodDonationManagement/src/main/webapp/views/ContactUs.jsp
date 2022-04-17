@@ -28,16 +28,6 @@
 
 		</div>
 	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	<!-- end Best -->
-	<!-- contact -->
-	<!-- end contact -->
-	<!-- clients -->
 	<div id="donors" class="clients ">
 		<div class="container">
 			<div class="row d_flex">
@@ -67,7 +57,9 @@
 										placeholder="Message for us!" name="msg" id="msg"></textarea>
 								</div>
 
-								<button type="submit" class="btn cardBg text-white">Submit</button>
+								<div class="form-group col-md-12 text-right">
+									<button type="submit" class="btn btn-primary text-white">Submit</button>
+								</div>
 							</form>
 						</div>
 					</div>

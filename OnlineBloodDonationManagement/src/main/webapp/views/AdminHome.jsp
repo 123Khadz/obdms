@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="bootstrap/css/SignUp.css">
 <title>Admin Dashboard</title>
 </head>
 <body>
@@ -14,11 +15,11 @@
 		<div class="row">
 			<c:forEach var="stock" items="${stockList }">
 				<div class="col-md-3 grid-margin stretch-card">
-					<div class="card rounded bg-success text-white mb-3">
+					<div class="card rounded cardBg text-white mb-3">
 						<div class="card-body font-weight-">
 							<h3 class="text-center font-weight-semibold">
 								${stock.bloodGroup }<sup><span
-									class="top-0 start-100 translate-middle badge rounded-pill bg-dark">${stock.stockOfBlood }</span></sup>
+									class="top-0 start-100 translate-middle badge rounded-pill bg-success">${stock.stockOfBlood }</span></sup>
 							</h3>
 						</div>
 					</div>

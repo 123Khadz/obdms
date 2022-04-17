@@ -30,12 +30,10 @@
 		<!-- partial:partials/_navbar.html -->
 		<nav style="background: #000 !important;"
 			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-			<div style="background: rgb(100, 10, 10) !important;"
-				class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-				<a class="navbar-brand brand-logo" href="adminhome"> </a> <a
-					class="navbar-brand brand-logo-mini" href="adminhome"> <img
-					src="images/logo.png" alt="logo" />
-				</a>
+			<div style="background: rgb(100, 10, 10) !important; color:white;"
+				class="navbar-brand-wrapper d-flex align-items-top">
+				<a class="navbar-brand brand-logo" href="adminhome"><img class="w-25 h-75 mr-0 ml-0" 
+					src="images/logo.png" alt="logo"/>Red Gold</a>
 			</div>
 			<div class="navbar-menu-wrapper d-flex align-items-center">
 				<ul class="navbar-nav ml-auto">

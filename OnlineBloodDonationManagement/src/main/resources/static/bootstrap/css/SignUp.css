@@ -24,3 +24,9 @@
 .nav:hover{
 	color: #ff4f4f;
 }
+
+.cardBg{
+	background: url("../../images/form1.png");
+	background-color: #ff4f4f;
+	color: white;
+}
