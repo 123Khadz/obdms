@@ -92,10 +92,10 @@
 									<h1>Red Gold</h1>
 									<span>Blood Donation Manager</span><br> <span><strong
 										class="land_bold">Looking For Blood?</strong></span>
-									<form>
+									<form action="/search" method="post">
 										<div class="input-group w-50">
 											<input type="search" class="form-control input-text"
-												placeholder="Search Here">
+												id="searchText" name="searchText" placeholder="Search Here">
 											<div class="input-group-append w-25">
 												<button type="submit" class="w-50">
 													<i class="fa fa-search"></i>

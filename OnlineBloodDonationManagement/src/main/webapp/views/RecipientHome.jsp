@@ -9,7 +9,7 @@
 <title>Dashboard</title>
 </head>
 <body>
-	<%@include file="DonorHeader.jsp"%>
+	<%@include file="RecipientHeader.jsp"%>
 	<div class="content-wrapper">
 
 		<div class="row">
@@ -18,7 +18,7 @@
 					<div class="img_box">
 
 						<figure>
-							<img src="${donorUser.dpURL }" alt="#" />
+							<img src="${recipientUser.dpURL }" alt="#" />
 						</figure>
 					</div>
 				</div>
@@ -28,29 +28,29 @@
 							<div class="card-body">
 								<div class="d-flex justify-content-between">
 									<h2 class="card-title font-weight-bold mb-0">Welcome
-										${donorUser.firstName }</h2>
+										${recipientUser.firstName }</h2>
 								</div>
 								<div class="table-responsive">
 									<table class="table table-striped table-hover">
 										<tr>
 											<td>Name:</td>
-											<td>${donorUser.firstName } ${donorUser.lastName }</td>
+											<td>${recipientUser.firstName } ${recipientUser.lastName }</td>
 										</tr>
 										<tr>
 											<td>Name:</td>
-											<td>${donorUser.bloodGroup.bloodGroup }</td>
+											<td>${recipientUser.bloodGroup.bloodGroup }</td>
 										</tr>
 										<tr>
 											<td>Gender:</td>
-											<td>${donorUser.gender }</td>
+											<td>${recipientUser.gender }</td>
 										</tr>
 										<tr>
 											<td>Email:</td>
-											<td>${donorUser.email }</td>
+											<td>${recipientUser.email }</td>
 										</tr>
 										<tr>
 											<td>Contact:</td>
-											<td>${donorUser.phoneNumber }</td>
+											<td>${recipientUser.phoneNumber }</td>
 										</tr>
 									</table>
 								</div>
@@ -65,7 +65,4 @@
 
 	<%@include file="AdminFooter.jsp"%>
 </body>
-
-
-
 </html>

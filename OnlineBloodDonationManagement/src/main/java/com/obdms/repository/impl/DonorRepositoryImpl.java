@@ -51,7 +51,7 @@ public class DonorRepositoryImpl implements DonorRepository {
 	@Override
 	public Donor findDonorByEmailAndPassword(String email, String password) {
 		try {
-			return (Donor) entityManager.createQuery("from Donor where email = :email and password = :password")
+			return (Donor) entityManager.createQuery("from Donor where email = :email and password = :password and status=1")
 					.setParameter("email", email).setParameter("password", password).getSingleResult();
 		} catch (NoResultException e) {
 		}
@@ -72,7 +72,7 @@ public class DonorRepositoryImpl implements DonorRepository {
 	@Override
 	public List<Donor> getDonorListSortedById() {
 		try {
-			return entityManager.createQuery("from Donor order by donorId").getResultList();
+			return entityManager.createQuery("from Donor order by donorId desc").getResultList();
 		} catch (NoResultException e) {
 		}
 		return null;

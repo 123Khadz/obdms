@@ -41,4 +41,12 @@ public class AddressServiceImpl implements AddressService {
 		return address;
 	}
 
+	@Override
+	public Address findAddress(String location) {
+		Address address = null;
+		if (location != null)
+			address = addressRepository.findAddress(location);
+		return address;
+	}
+
 }

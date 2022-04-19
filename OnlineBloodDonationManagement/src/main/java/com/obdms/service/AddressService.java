@@ -11,5 +11,7 @@ public interface AddressService {
 	void deleteAddress(Address address);
 	
 	Address findAddress(String location, Long pincode);
+	
+	Address findAddress(String location);
 
 }

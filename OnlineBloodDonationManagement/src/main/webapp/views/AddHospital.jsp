@@ -170,7 +170,7 @@
 													class="btn btn-success">View</a> <a
 													href="edit_hospital?hospitalId=${hospital.hospitalId }"
 													class="btn btn-primary">Edit</a> <a
-													href="edit_hospital?hospitalId=${hospital.hospitalId }"
+													href="delete_hospital?hospitalId=${hospital.hospitalId }"
 													class="btn btn-danger">Delete</a></td>
 											</tr>
 										</c:forEach>

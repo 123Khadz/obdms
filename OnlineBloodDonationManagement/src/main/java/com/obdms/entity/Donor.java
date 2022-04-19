@@ -47,7 +47,7 @@ public class Donor {
 	private String dpURL;
 
 	@Column(nullable = false)
-	private int status;
+	private int status=1;
 
 	@OneToMany(mappedBy = "donor", cascade = CascadeType.ALL)
 	private List<Appointment> appointmentsList;

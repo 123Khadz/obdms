@@ -46,4 +46,15 @@ public class AddressRepositoryImpl implements AddressRepository {
 		return null;
 	}
 
+	@Override
+	public Address findAddress(String location) {
+		location = "%" + location + "%";
+		try {
+			return (Address) entityManager.createQuery("from Address where location like :location")
+					.setParameter("location", location).getSingleResult();
+		} catch (NoResultException e) {
+		}
+		return null;
+	}
+
 }

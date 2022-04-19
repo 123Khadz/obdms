@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.obdms.entity.Address;
 import com.obdms.entity.Hospital;
 import com.obdms.repository.HospitalRepository;
 import com.obdms.service.HospitalService;
@@ -47,11 +48,6 @@ public class HospitalServiceImpl implements HospitalService {
 	}
 
 	@Override
-	public List<Hospital> getHospitalList(long stateId, long cityId) {
-		return hospitalRepository.getHospitalList(stateId, cityId);
-	}
-
-	@Override
 	public Hospital findHospitalByName(String hospitalName) {
 		Hospital hospital = null;
 		if (hospitalName != null)
@@ -65,6 +61,11 @@ public class HospitalServiceImpl implements HospitalService {
 		if (hospitalId != null)
 			hospital= hospitalRepository.findHospitalById(hospitalId);
 		return hospital;
+	}
+
+	@Override
+	public List<Hospital> findHospitalsByAddress(Address address) {
+		return hospitalRepository.findHospitalsByAddress(address);
 	}
 
 }

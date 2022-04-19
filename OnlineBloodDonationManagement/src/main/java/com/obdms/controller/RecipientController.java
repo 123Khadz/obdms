@@ -26,16 +26,16 @@ import com.obdms.service.RecipientService;
 import com.obdms.service.StateService;
 
 @Controller
-public class DonorController {
-
-	@Autowired
-	AdminService adminService;
+public class RecipientController {
 
 	@Autowired
 	CityService cityService;
 
 	@Autowired
 	StateService stateService;
+
+	@Autowired
+	AdminService adminService;
 
 	@Autowired
 	DonorService donorService;
@@ -49,14 +49,14 @@ public class DonorController {
 	@Autowired
 	BloodGroupService bloodGroupService;
 
-	@PostMapping("/add_donor")
-	public String add_donor(@RequestParam(value = "stateId") long stateId, @RequestParam(value = "cityId") long cityId,
-			@RequestParam(value = "bloodGroupId") long bloodGroupId, Donor donor, Address address, Model model,
-			HttpServletRequest request) {
+	@PostMapping("/add_recipient")
+	public String add_recipient(@RequestParam(value = "stateId") long stateId,
+			@RequestParam(value = "cityId") long cityId, @RequestParam(value = "bloodGroupId") long bloodGroupId,
+			Recipient recipient, Address address, Model model, HttpServletRequest request) {
 
-		Admin admin = adminService.findByEmail(donor.getEmail());
-		Donor existingDonor = donorService.findDonorByEmail(donor.getEmail());
-		Recipient existingRecipient = recipientService.findRecipientByEmail(donor.getEmail());
+		Admin admin = adminService.findByEmail(recipient.getEmail());
+		Donor existingDonor = donorService.findDonorByEmail(recipient.getEmail());
+		Recipient existingRecipient = recipientService.findRecipientByEmail(recipient.getEmail());
 
 		if (admin == null && existingDonor == null && existingRecipient == null) {
 			Address existingAddress = addressService.findAddress(address.getLocation(), address.getPincode());
@@ -67,33 +67,33 @@ public class DonorController {
 				address.setCity(city);
 				address.setState(state);
 				addressService.addAddress(address);
-				donor.setAddress(address);
+				recipient.setAddress(address);
 			} else {
-				donor.setAddress(existingAddress);
+				recipient.setAddress(existingAddress);
 			}
-			donor.setBloodGroup(group);
-			donor.setDpURL("images/clients.png");
-			donorService.createDonor(donor);
+			recipient.setBloodGroup(group);
+			recipient.setDpURL("images/clients.png");
+			recipientService.createRecipient(recipient);
 
 			HttpSession session = request.getSession();
-			session.setAttribute("donorUser", donor);
+			session.setAttribute("recipientUser", recipient);
 
-			return "redirect:/donorhome";
+			return "redirect:/recipienthome";
 		} else {
-			model.addAttribute("existDonor", true);
-			return "SignUp";
+			model.addAttribute("existRecipient", true);
+			return "SignUpRecipient";
 		}
-
 	}
 
-	@RequestMapping("/donorhome")
-	public String donorhome(HttpServletRequest request, Model model) {
+	@RequestMapping("/recipienthome")
+	public String recipienthome(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("donorUser") != null) {
-			return "DonorHome";
+		if (session.getAttribute("recipientUser") != null) {
+			return "RecipientHome";
 		}
 
 		model.addAttribute("loginError", true);
 		return "Home";
 	}
+
 }

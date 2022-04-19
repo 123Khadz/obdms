@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.obdms.entity.Address;
 import com.obdms.entity.Hospital;
 import com.obdms.repository.HospitalRepository;
 
@@ -58,17 +59,6 @@ public class HospitalRepositoryImpl implements HospitalRepository {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Hospital> getHospitalList(long stateId, long cityId) {
-		try {
-			return entityManager.createQuery("from Hospital where stateId = :stateId and cityId = :cityId")
-					.getResultList();
-		} catch (NoResultException e) {
-		}
-		return null;
-	}
-
 	@Override
 	public Hospital findHospitalByName(String hospitalName) {
 		try {
@@ -84,6 +74,17 @@ public class HospitalRepositoryImpl implements HospitalRepository {
 		try {
 			return (Hospital) entityManager.createQuery("from Hospital where hospitalId = :hospitalId")
 					.setParameter("hospitalId", hospitalId).getSingleResult();
+		} catch (NoResultException e) {
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Hospital> findHospitalsByAddress(Address address) {
+		try {
+			return entityManager.createQuery("from Hospital where address = :address").setParameter("address", address)
+					.getResultList();
 		} catch (NoResultException e) {
 		}
 		return null;

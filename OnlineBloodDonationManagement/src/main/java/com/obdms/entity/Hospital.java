@@ -31,7 +31,7 @@ public class Hospital {
 	private String email;
 
 	@Column(nullable = false)
-	private int status;
+	private int status=1;
 
 	@OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
 	private List<BloodBank> bloodBanksList;

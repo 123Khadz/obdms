@@ -39,37 +39,21 @@
 									<table class="table table-striped table-hover">
 										<thead>
 											<tr>
-												<th>ID</th>
 												<th>Name</th>
 												<th>Blood Group</th>
-												<th>Date</th>
+												<th>Email</th>
+												<th>Contact</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
+											<c:forEach var="donor" items="${donorList }">
+												<tr>
+													<td>${donor.firstName } ${donor.lastName }</td>
+													<td>${donor.bloodGroup.bloodGroup }</td>
+													<td>${donor.email }</td>
+													<td>${donor.phoneNumber }</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -91,37 +75,21 @@
 									<table class="table table-striped table-hover">
 										<thead>
 											<tr>
-												<th>ID</th>
 												<th>Name</th>
 												<th>Blood Group</th>
-												<th>Date</th>
+												<th>Email</th>
+												<th>Contact</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
-											<tr>
-												<td>INV-87239</td>
-												<td>Viola Ford</td>
-												<td>B+</td>
-												<td>20 Jan 2019</td>
-											</tr>
+											<c:forEach var="recipient" items="${recipientList }">
+												<tr>
+													<td>${recipient.firstName } ${recipient.lastName }</td>
+													<td>${recipient.bloodGroup.bloodGroup }</td>
+													<td>${recipient.email }</td>
+													<td>${recipient.phoneNumber }</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

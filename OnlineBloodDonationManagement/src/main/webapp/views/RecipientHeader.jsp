@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<!-- Required meta tags -->
 <meta charset="ISO-8859-1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,7 +21,7 @@
 <link rel="stylesheet" href="assets/css/demo_1/style.css">
 <link rel="icon" href="images/fevicon.png" type="image/gif" />
 
-<title>Admin Dashboard</title>
+<title>Donor Dashboard</title>
 <link rel="shortcut icon" href="images/logo.png">
 </head>
 <body>
@@ -30,10 +29,12 @@
 		<!-- partial:partials/_navbar.html -->
 		<nav style="background: #000 !important;"
 			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-			<div style="background: rgb(100, 10, 10) !important; color:white;"
-				class="navbar-brand-wrapper d-flex align-items-top">
-				<a class="navbar-brand brand-logo" href="adminhome"><img class="w-25 h-75 mr-0 ml-0" 
-					src="images/logo.png" alt="logo"/>Red Gold</a>
+			<div style="background: rgb(100, 10, 10) !important;"
+				class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+				<a class="navbar-brand brand-logo" href="recipienthome"> </a> <a
+					class="navbar-brand brand-logo-mini" href="recipienthome"> <img
+					src="images/logo.png" alt="logo" />
+				</a>
 			</div>
 			<div class="navbar-menu-wrapper d-flex align-items-center">
 				<ul class="navbar-nav ml-auto">
@@ -42,14 +43,14 @@
 						<a class="nav-link dropdown-toggle" id="UserDropdown" href="#"
 						data-toggle="dropdown" aria-expanded="false"> <img
 							class="img-xs rounded-circle"
-							src="assets/images/faces/admin_icon.png" alt="Profile image">
+							src="${recipientUser.dpURL}" alt="Profile image">
 					</a>
 						<div class="dropdown-menu dropdown-menu-right navbar-dropdown"
 							aria-labelledby="UserDropdown">
 							<div class="dropdown-header text-center">
 								<img class="img-md rounded-circle"
-									src="assets/images/faces/admin_icon.png" alt="Profile image">
-								<p class="mb-1 mt-3 font-weight-semibold">Admin</p>
+									src="${recipientUser.dpURL}" alt="Profile image">
+								<p class="mb-1 mt-3 font-weight-semibold">${recipientUser.firstName}</p>
 							</div>
 							<a class="dropdown-item">Change Password<i
 								class="dropdown-item-icon ti-dashboard"></i></a> <a
@@ -71,60 +72,43 @@
 			<nav style="background: rgb(100, 10, 10) !important;"
 				class="sidebar sidebar-offcanvas" id="sidebar">
 				<ul class="nav">
-					<li class="nav-item nav-profile"><a href="#" class="nav-link">
+					<li class="nav-item nav-profile"><a href="recipienthome" class="nav-link">
 							<div class="profile-image">
 								<img class="img-xs rounded-circle"
-									src="assets/images/faces/admin_icon.png" alt="profile image">
+									src="${recipientUser.dpURL}" alt="profile image">
 								<div class="dot-indicator bg-success"></div>
 							</div>
 							<div class="text-wrapper">
-								<p class="profile-name">Admin</p>
+								<p class="profile-name">${recipientUser.firstName}</p>
 								<!-- <p class="designation">Admin</p> -->
 							</div>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="adminhome">
+					<li class="nav-item"><a class="nav-link" href="recipienthome">
 							<i class="menu-icon typcn typcn-document-text"></i> <span
 							class="menu-title">Dashboard</span>
 					</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="donor_list">
+					<li class="nav-item"><a class="nav-link" href="Donors.html">
 							<i class="menu-icon typcn typcn-shopping-bag"></i> <span
-							class="menu-title">Donors</span>
+							class="menu-title">Order History</span>
 					</a></li>
 
 					<li class="nav-item"><a class="nav-link"
-						href="recipient_list"> <i
+						href="#"> <i
 							class="menu-icon typcn typcn-th-large-outline"></i> <span
-							class="menu-title">Recipients</span>
+							class="menu-title">Edit Profile</span>
 					</a></li>
-
-					<li class="nav-item"><a class="nav-link" href="add_hospital">
-							<i class="menu-icon typcn typcn-th-large-outline"></i> <span
-							class="menu-title">Hospitals</span>
-					</a></li>
-
-					<li class="nav-item"><a class="nav-link" href="add_blood_bank">
-							<i class="menu-icon typcn typcn-th-large-outline"></i> <span
-							class="menu-title">Blood Bank</span>
-					</a></li>
-
 					<li class="nav-item"><a class="nav-link"
-						href="add_blood_group"> <i
+						href="#"> <i
 							class="menu-icon typcn typcn-th-large-outline"></i> <span
-							class="menu-title">Blood Group</span>
+							class="menu-title">Order Blood</span>
 					</a></li>
 
-					<li class="nav-item"><a class="nav-link" href="add_state">
-							<i class="menu-icon typcn typcn-th-large-outline"></i> <span
-							class="menu-title">State</span>
-					</a></li>
-
-					<li class="nav-item"><a class="nav-link" href="add_city">
-							<i class="menu-icon typcn typcn-th-large-outline"></i> <span
-							class="menu-title">City</span>
-					</a></li>
+				
 				</ul>
 			</nav>
 			<div class="main-panel">
 </body>
+
+
 </html>

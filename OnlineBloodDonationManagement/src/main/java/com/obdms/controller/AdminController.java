@@ -17,7 +17,9 @@ import com.obdms.entity.BloodGroup;
 import com.obdms.service.BloodBankService;
 import com.obdms.service.BloodGroupService;
 import com.obdms.service.CityService;
+import com.obdms.service.DonorService;
 import com.obdms.service.HospitalService;
+import com.obdms.service.RecipientService;
 import com.obdms.service.StateService;
 
 @Controller
@@ -37,6 +39,12 @@ public class AdminController {
 
 	@Autowired
 	BloodBankService bloodBankService;
+	
+	@Autowired
+	DonorService donorService;
+	
+	@Autowired
+	RecipientService recipientService;
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ArrayList getStockByBloodGroup() {
@@ -68,6 +76,8 @@ public class AdminController {
 		if (session.getAttribute("adminUser") != null) {
 			ArrayList arrayList = getStockByBloodGroup();
 			model.addAttribute("stockList", arrayList);
+			model.addAttribute("donorList", donorService.getDonorListSortedById());
+			model.addAttribute("recipientList", recipientService.getRecipientListSortedById());
 			return "AdminHome";
 		}
 
@@ -129,6 +139,28 @@ public class AdminController {
 			model.addAttribute("bloodGroupList", bloodGroupService.getBloodGroupListSortedById());
 			model.addAttribute("bloodBankList", bloodBankService.getBloodBankList());
 			return "AddBloodBank";
+		}
+		model.addAttribute("loginError", true);
+		return "Home";
+	}
+	
+	@RequestMapping("/donor_list")
+	public String donor_list(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("adminUser") != null) {
+			model.addAttribute("donorList", donorService.getDonorListSortedById());
+			return "DonorList";
+		}
+		model.addAttribute("loginError", true);
+		return "Home";
+	}
+	
+	@RequestMapping("/recipient_list")
+	public String recipient_list(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if (session.getAttribute("adminUser") != null) {
+			model.addAttribute("recipientList", recipientService.getRecipientListSortedById());
+			return "RecipientList";
 		}
 		model.addAttribute("loginError", true);
 		return "Home";

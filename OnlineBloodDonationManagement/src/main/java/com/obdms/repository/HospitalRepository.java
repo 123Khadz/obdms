@@ -2,6 +2,7 @@ package com.obdms.repository;
 
 import java.util.List;
 
+import com.obdms.entity.Address;
 import com.obdms.entity.Hospital;
 
 public interface HospitalRepository {
@@ -16,10 +17,10 @@ public interface HospitalRepository {
 	
 	List<Hospital> getHospitalListSortedByName();
 	
-	List<Hospital> getHospitalList(long stateId, long cityId);
-	
 	Hospital findHospitalByName(String hospitalName);
 	
 	Hospital findHospitalById(Long hospitalId);
+	
+	List<Hospital> findHospitalsByAddress(Address address);
 
 }

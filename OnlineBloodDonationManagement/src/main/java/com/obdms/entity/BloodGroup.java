@@ -20,6 +20,9 @@ public class BloodGroup {
 	@OneToMany(mappedBy = "bloodGroup", cascade = CascadeType.ALL)
 	private List<Donor> donorsList;
 
+	@OneToMany(mappedBy = "bloodGroup", cascade = CascadeType.ALL)
+	private List<Recipient> recipientsList;
+
 	public long getBloodGroupId() {
 		return bloodGroupId;
 	}
@@ -50,6 +53,14 @@ public class BloodGroup {
 
 	public void setDonorsList(List<Donor> donorsList) {
 		this.donorsList = donorsList;
+	}
+
+	public List<Recipient> getRecipientsList() {
+		return recipientsList;
+	}
+
+	public void setRecipientsList(List<Recipient> recipientsList) {
+		this.recipientsList = recipientsList;
 	}
 
 }

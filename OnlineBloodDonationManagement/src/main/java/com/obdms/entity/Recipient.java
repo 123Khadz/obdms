@@ -24,8 +24,9 @@ public class Recipient {
 	@Column(nullable = false)
 	private int age;
 
-	@Column(nullable = false, length = 50)
-	private String bloodGroup;
+	@ManyToOne
+	@JoinColumn(name = "bloodGroup")
+	private BloodGroup bloodGroup;
 
 	@ManyToOne
 	@JoinColumn(name = "address")
@@ -46,7 +47,7 @@ public class Recipient {
 	private String dpURL;
 
 	@Column(nullable = false)
-	private int status;
+	private int status=1;
 
 	@OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
 	private List<Receipt> receiptsList;
@@ -94,11 +95,11 @@ public class Recipient {
 		this.age = age;
 	}
 
-	public String getBloodGroup() {
+	public BloodGroup getBloodGroup() {
 		return bloodGroup;
 	}
 
-	public void setBloodGroup(String bloodGroup) {
+	public void setBloodGroup(BloodGroup bloodGroup) {
 		this.bloodGroup = bloodGroup;
 	}
 
